@@ -4,248 +4,343 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="#071416">
-  <title>Naim Sales Performance</title>
+  <title>Naim Sales Performance V2</title>
   <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-  <div class="app-shell">
-    <aside class="sidebar">
-      <div class="brand">
-        <div class="brand-mark">N</div>
-        <div>
-          <strong>NAIM SALES</strong>
-          <span>Performance Tracker</span>
-        </div>
+<div class="app">
+  <aside class="sidebar">
+    <div class="brand">
+      <div class="brand-logo">N</div>
+      <div><strong>NAIM SALES</strong><span>Sales • Marketing • Commission</span></div>
+    </div>
+
+    <nav>
+      <button class="nav active" data-page="dashboard">▦ <span>Dashboard</span></button>
+      <button class="nav" data-page="input">＋ <span>Input Sales</span></button>
+      <button class="nav" data-page="gmv">◉ <span>Marketing GMV</span></button>
+      <button class="nav" data-page="cod">◎ <span>COD Tracker</span></button>
+      <button class="nav" data-page="commission">RM <span>Komisen</span></button>
+      <button class="nav" data-page="target">⌖ <span>Target Bulan</span></button>
+      <button class="nav" data-page="history">▤ <span>Data Lama</span></button>
+      <button class="nav" data-page="settings">⚙ <span>Rules & Setting</span></button>
+      <button class="nav" data-page="backup">⇩ <span>Backup</span></button>
+    </nav>
+
+    <div class="side-note">
+      <span>STRUKTUR SALES</span>
+      <strong>Sales ≠ Marketing GMV</strong>
+      <small>Total Sales hanya WhatsApp + Live ikut cycle komisen. GMV kekal sebagai Marketing.</small>
+    </div>
+  </aside>
+
+  <main>
+    <header class="topbar">
+      <div>
+        <h1 id="pageTitle">Dashboard Sales Naim</h1>
+        <p id="pageSub">Sales, marketing, COD dan anggaran komisen dalam satu sistem.</p>
+      </div>
+      <div class="top-actions">
+        <label class="month-picker"><span>Bulan</span><input type="month" id="monthPicker"></label>
+        <button class="icon" id="themeBtn" title="Tukar tema">☾</button>
+      </div>
+    </header>
+
+    <section class="page active" id="page-dashboard">
+      <div class="notice">
+        <strong>Formula utama:</strong>
+        Total Sales = WhatsApp + Live cycle (26hb bulan lepas → 25hb bulan ini).
+        <b>TikTok GMV tidak masuk Total Sales.</b>
       </div>
 
-      <nav class="nav">
-        <button class="nav-item active" data-page="dashboard">▦ <span>Dashboard</span></button>
-        <button class="nav-item" data-page="input">＋ <span>Input Sales</span></button>
-        <button class="nav-item" data-page="target">◎ <span>Target Bulan</span></button>
-        <button class="nav-item" data-page="historical">▤ <span>Data Lama</span></button>
-        <button class="nav-item" data-page="yearly">◫ <span>Prestasi Tahunan</span></button>
-        <button class="nav-item" data-page="backup">⇩ <span>Backup Data</span></button>
-      </nav>
-
-      <div class="sidebar-note">
-        <span>HISTORICAL</span>
-        <strong>Mac 2024 — Jul 2026</strong>
-        <small>Data asal dari Forecast Sales Naim.xlsx</small>
-      </div>
-    </aside>
-
-    <main class="main">
-      <header class="topbar">
-        <div>
-          <h1 id="pageTitle">Dashboard Sales Naim</h1>
-          <p id="pageSubtitle">Pantau target, sales, leads dan prestasi dari bulan ke bulan.</p>
-        </div>
-        <div class="top-actions">
-          <label class="month-control">
-            <span>Bulan</span>
-            <input id="monthPicker" type="month">
-          </label>
-          <button id="themeBtn" class="icon-btn" title="Tukar tema">☾</button>
-        </div>
-      </header>
-
-      <section id="page-dashboard" class="page active">
-        <div class="hero-grid">
-          <article class="card hero-card">
-            <div class="eyebrow">PRESTASI BULANAN</div>
-            <div class="hero-row">
-              <div>
-                <span class="muted">Sales Semasa</span>
-                <div class="big-money" id="kpiSales">RM 0</div>
-              </div>
-              <div class="target-side">
-                <span class="muted">Target</span>
-                <strong id="kpiTarget">RM 0</strong>
-              </div>
-            </div>
-            <div class="progress"><div id="targetProgress"></div></div>
-            <div class="progress-meta">
-              <span id="kpiAchievement">0% dicapai</span>
-              <span id="kpiBalance">Baki RM 0</span>
-            </div>
-          </article>
-
-          <article class="card stat-card">
-            <span class="muted">Leads</span>
-            <strong id="kpiLeads">0</strong>
-            <small id="leadsNote">Jumlah leads bulan dipilih</small>
-          </article>
-
-          <article class="card stat-card">
-            <span class="muted">Buyer</span>
-            <strong id="kpiBuyer">0</strong>
-            <small id="buyerNote">Jumlah buyer bulan dipilih</small>
-          </article>
-
-          <article class="card stat-card accent-border">
-            <span class="muted">Conversion Rate</span>
-            <strong id="kpiConversion">0%</strong>
-            <small id="conversionNote">Buyer ÷ leads</small>
-          </article>
-        </div>
-
-        <div class="section-head">
-          <div>
-            <div class="eyebrow">PACE & FORECAST</div>
-            <h2>Adakah sales ikut target?</h2>
+      <div class="kpi-grid">
+        <article class="card hero">
+          <div class="eyebrow">TOTAL SALES</div>
+          <div class="hero-row">
+            <div><span class="muted">Actual</span><strong id="dTotalSales">RM 0</strong></div>
+            <div class="right"><span class="muted">Target</span><b id="dTarget">RM 0</b></div>
           </div>
-          <span id="paceBadge" class="badge neutral">BELUM ADA TARGET</span>
-        </div>
-
-        <div class="mini-grid">
-          <article class="card mini-card"><span>Target sepatutnya setakat hari ini</span><strong id="paceExpected">RM 0</strong><small id="paceExpectedSub">—</small></article>
-          <article class="card mini-card"><span>Beza vs pace</span><strong id="paceDifference">RM 0</strong><small id="paceDifferenceSub">—</small></article>
-          <article class="card mini-card"><span>Perlu capai / hari</span><strong id="paceDailyNeed">RM 0</strong><small id="paceDailyNeedSub">—</small></article>
-          <article class="card mini-card"><span>Forecast akhir bulan</span><strong id="paceForecast">RM 0</strong><small id="paceForecastSub">Berdasarkan pace semasa</small></article>
-        </div>
-
-        <div class="two-col">
-          <article class="card chart-card">
-            <div class="card-head">
-              <div><span class="eyebrow">TREND HARIAN</span><h3>Sales vs Target</h3></div>
-            </div>
-            <canvas id="dailyChart" height="250"></canvas>
-            <div id="chartEmpty" class="chart-empty hidden">Tiada data harian untuk bulan ini.</div>
-          </article>
-
-          <article class="card">
-            <div class="card-head">
-              <div><span class="eyebrow">CHANNEL</span><h3>Pecahan Sales</h3></div>
-            </div>
-            <div id="channelList" class="channel-list"></div>
-            <div id="channelNote" class="info-note"></div>
-          </article>
-        </div>
-
-        <div class="section-head">
-          <div><div class="eyebrow">HISTORY</div><h2>Trend Bulanan</h2></div>
-          <button class="ghost-btn" data-go="historical">Lihat semua bulan →</button>
-        </div>
-        <article class="card chart-card">
-          <canvas id="monthlyChart" height="230"></canvas>
+          <div class="progress"><i id="dProgress"></i></div>
+          <div class="meta"><span id="dAchievement">0%</span><span id="dBalance">Baki RM 0</span></div>
         </article>
-      </section>
+        <article class="card metric"><span>WhatsApp</span><strong id="dWhatsapp">RM 0</strong><small id="dWhatsappSub">M9F + M9F 1</small></article>
+        <article class="card metric"><span>Live (Cycle)</span><strong id="dLive">RM 0</strong><small id="dLiveSub">26hb lepas → 25hb ini</small></article>
+        <article class="card metric marketing"><span>Marketing GMV</span><strong id="dGmv">RM 0</strong><small id="dGmvSub">Tidak campur Total Sales</small></article>
+        <article class="card metric commission"><span>Anggaran Komisen</span><strong id="dCommission">RM 0</strong><small id="dCommissionSub">Sales + GMV</small></article>
+      </div>
 
-      <section id="page-input" class="page">
-        <div class="form-layout">
-          <article class="card form-card">
-            <div class="card-head">
-              <div><span class="eyebrow">DATA BARU</span><h2>Input Sales Harian</h2></div>
-            </div>
-            <form id="salesForm">
-              <div class="form-grid">
-                <label>Tarikh<input id="entryDate" type="date" required></label>
-                <label>Channel
-                  <select id="entryChannel" required>
-                    <option value="WhatsApp">WhatsApp</option>
-                    <option value="Shopee Live">Shopee Live</option>
-                    <option value="Mamayuyu">Mamayuyu</option>
-                    <option value="TikTok Solusi">TikTok Solusi</option>
-                    <option value="TikTok GMV">TikTok GMV</option>
-                    <option value="M9F Live">M9F Live</option>
-                    <option value="Lain-lain">Lain-lain</option>
-                  </select>
-                </label>
-                <label>Sales (RM)<input id="entrySales" type="number" min="0" step="0.01" required placeholder="0.00"></label>
-                <label>Leads<input id="entryLeads" type="number" min="0" step="1" value="0"></label>
-                <label>Buyer<input id="entryBuyer" type="number" min="0" step="1" value="0"></label>
-                <label class="full">Nota<input id="entryNote" type="text" placeholder="Contoh: Closing promo / live malam"></label>
-              </div>
-              <button class="primary-btn" type="submit">Simpan Sales</button>
-            </form>
-          </article>
+      <div class="section-title">
+        <div><span class="eyebrow">BREAKDOWN</span><h2>Sales ikut sumber</h2></div>
+        <span id="paceBadge" class="badge neutral">BELUM ADA TARGET</span>
+      </div>
+      <div class="source-grid" id="sourceCards"></div>
 
-          <article class="card">
-            <div class="card-head">
-              <div><span class="eyebrow">REKOD TEMPATAN</span><h3>Input Bulan Dipilih</h3></div>
-            </div>
-            <div id="localEntryList" class="entry-list"></div>
-          </article>
-        </div>
-      </section>
+      <div class="mini-grid">
+        <article class="card mini"><span>Target sepatutnya hari ini</span><strong id="paceExpected">RM 0</strong><small id="paceExpectedSub">—</small></article>
+        <article class="card mini"><span>Beza pace</span><strong id="paceDiff">RM 0</strong><small id="paceDiffSub">—</small></article>
+        <article class="card mini"><span>Perlu / hari</span><strong id="paceNeed">RM 0</strong><small id="paceNeedSub">—</small></article>
+        <article class="card mini"><span>Forecast hujung bulan</span><strong id="paceForecast">RM 0</strong><small>berdasarkan pace semasa</small></article>
+      </div>
 
-      <section id="page-target" class="page">
-        <article class="card form-card target-card">
-          <div class="card-head">
-            <div><span class="eyebrow">TARGET BULANAN</span><h2>Set Target Sales</h2></div>
-            <strong id="targetCurrentDisplay" class="target-display">RM 0</strong>
+      <div class="two-col">
+        <article class="card chart-card">
+          <div class="card-head"><div><span class="eyebrow">TREND</span><h3>Total Sales vs Target</h3></div></div>
+          <canvas id="salesChart" height="250"></canvas>
+        </article>
+        <article class="card">
+          <div class="card-head"><div><span class="eyebrow">LIVE CYCLE</span><h3>Apa yang dikira bulan ini</h3></div></div>
+          <div class="calc-list">
+            <div><span>Carry 26hb–akhir bulan lepas</span><b id="liveCarry">RM 0</b></div>
+            <div><span>Live 1hb–25hb bulan ini</span><b id="liveCurrent">RM 0</b></div>
+            <div><span>Live 26hb–akhir bulan ini</span><b id="liveNext">RM 0</b></div>
+            <div class="total"><span>Live dikira bulan ini</span><b id="liveCycleTotal">RM 0</b></div>
           </div>
-          <p class="muted">Untuk bulan lama, target asal Excel akan digunakan. Kalau anda simpan target baru, nilai baru akan menjadi override pada browser ini.</p>
-          <form id="targetForm">
-            <label>Target Sales Bulan Dipilih (RM)
-              <input id="targetInput" type="number" min="0" step="0.01" placeholder="Contoh: 20000">
-            </label>
-            <button type="submit" class="primary-btn">Simpan Target</button>
-            <button type="button" id="removeTargetBtn" class="ghost-btn">Buang Override</button>
+          <p class="hint">Sales live selepas 25hb dipindahkan ke cycle komisen bulan depan.</p>
+        </article>
+      </div>
+
+      <div class="two-col">
+        <article class="card">
+          <div class="card-head"><div><span class="eyebrow">WHATSAPP</span><h3>M9F / M9F 1</h3></div></div>
+          <div id="wsCodeBreakdown" class="rows"></div>
+        </article>
+        <article class="card">
+          <div class="card-head"><div><span class="eyebrow">GMV</span><h3>Marketing Performance</h3></div></div>
+          <div class="calc-list">
+            <div><span>Ads Cost</span><b id="gmvAds">RM 0</b></div>
+            <div><span>SST</span><b id="gmvSst">RM 0</b></div>
+            <div><span>ROI</span><b id="gmvRoi">0.00</b></div>
+            <div class="total"><span>Komisen GMV</span><b id="gmvCommission">RM 0</b></div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <section class="page" id="page-input">
+      <div class="section-title"><div><span class="eyebrow">INPUT</span><h2>Sales WhatsApp & Live</h2></div></div>
+      <div class="two-col">
+        <article class="card form-card">
+          <div class="card-head"><div><span class="eyebrow">WHATSAPP</span><h3>Tambah Sales WhatsApp</h3></div></div>
+          <form id="wsForm">
+            <div class="form-grid">
+              <label>Tarikh<input id="wsDate" type="date" required></label>
+              <label>Kod<select id="wsCode"><option>M9F</option><option>M9F 1</option></select></label>
+              <label>Sales (RM)<input id="wsSales" type="number" min="0" step="0.01" required></label>
+              <label>Leads<input id="wsLeads" type="number" min="0" step="1" value="0"></label>
+              <label>Buyer<input id="wsBuyer" type="number" min="0" step="1" value="0"></label>
+              <label>Nota<input id="wsNote" type="text" placeholder="Optional"></label>
+            </div>
+            <button class="primary" type="submit">Simpan WhatsApp</button>
           </form>
         </article>
 
-        <div class="checkpoint-grid">
-          <article class="card checkpoint"><span>25% bulan</span><strong id="cp25">RM 0</strong></article>
-          <article class="card checkpoint"><span>50% bulan</span><strong id="cp50">RM 0</strong></article>
-          <article class="card checkpoint"><span>75% bulan</span><strong id="cp75">RM 0</strong></article>
-          <article class="card checkpoint"><span>100% bulan</span><strong id="cp100">RM 0</strong></article>
-        </div>
-      </section>
-
-      <section id="page-historical" class="page">
-        <div class="section-head">
-          <div><div class="eyebrow">FORECAST SALES NAIM.XLSX</div><h2>Data Lama</h2></div>
-          <div class="filter-row">
-            <select id="historyYearFilter"><option value="all">Semua Tahun</option></select>
-          </div>
-        </div>
-        <article class="card table-card">
-          <div class="table-wrap">
-            <table>
-              <thead><tr>
-                <th>Bulan</th><th>Target</th><th>Sales Rekod Utama</th><th>Achievement</th><th>Leads</th><th>Buyer</th><th>Conversion</th><th>Overall/Official*</th>
-              </tr></thead>
-              <tbody id="historyTableBody"></tbody>
-            </table>
-          </div>
-          <p class="footnote">* Overall/Official hanya dipaparkan jika nilai itu memang direkodkan secara berasingan dalam sheet asal. Sales Rekod Utama diambil daripada jadual utama setiap bulan.</p>
+        <article class="card form-card">
+          <div class="card-head"><div><span class="eyebrow">LIVE</span><h3>Tambah Sales Live</h3></div></div>
+          <form id="liveForm">
+            <div class="form-grid">
+              <label>Tarikh<input id="liveDate" type="date" required></label>
+              <label>Live<select id="liveSource"><option>TikTok HQ</option><option>TikTok Solusi</option><option>Lain-lain Live</option></select></label>
+              <label>Sales (RM)<input id="liveSales" type="number" min="0" step="0.01" required></label>
+              <label>Masa<input id="liveTime" type="text" placeholder="cth 20:30 - 22:30"></label>
+              <label class="full">Nota<input id="liveNote" type="text" placeholder="Optional"></label>
+            </div>
+            <button class="primary" type="submit">Simpan Live</button>
+          </form>
         </article>
-      </section>
+      </div>
 
-      <section id="page-yearly" class="page">
-        <div class="section-head"><div><div class="eyebrow">YEARLY VIEW</div><h2>Prestasi Tahunan</h2></div></div>
-        <div id="yearCards" class="year-grid"></div>
-        <article class="card chart-card"><canvas id="yearChart" height="260"></canvas></article>
-      </section>
-
-      <section id="page-backup" class="page">
-        <div class="backup-grid">
-          <article class="card">
-            <div class="eyebrow">BACKUP</div>
-            <h2>Export Data Baru</h2>
-            <p class="muted">Data Excel lama memang sudah berada dalam HTML. Fungsi ini backup data baru dan target override yang anda masukkan melalui dashboard.</p>
-            <button id="exportBtn" class="primary-btn">Download Backup JSON</button>
-          </article>
-          <article class="card">
-            <div class="eyebrow">RESTORE</div>
-            <h2>Import Backup</h2>
-            <p class="muted">Pilih fail JSON yang pernah diexport daripada sistem ini.</p>
-            <input id="importFile" type="file" accept=".json,application/json">
-          </article>
-          <article class="card danger-card">
-            <div class="eyebrow">RESET</div>
-            <h2>Padam Data Tempatan</h2>
-            <p class="muted">Ini hanya padam input baru/target override pada browser ini. Data sejarah Excel tidak akan hilang.</p>
-            <button id="clearBtn" class="danger-btn">Padam Data Tempatan</button>
-          </article>
+      <article class="card table-card top-gap">
+        <div class="card-head"><div><span class="eyebrow">REKOD BARU</span><h3>WhatsApp & Live — bulan dipilih</h3></div></div>
+        <div class="table-wrap">
+          <table><thead><tr><th>Tarikh</th><th>Jenis</th><th>Sumber/Kod</th><th>Sales</th><th>Leads</th><th>Buyer</th><th></th></tr></thead><tbody id="salesEntryBody"></tbody></table>
         </div>
-      </section>
-    </main>
-  </div>
+      </article>
+    </section>
 
-  <div id="toast" class="toast"></div>
-  <script src="js/historical-data.js"></script>
-  <script src="js/app.js"></script>
+    <section class="page" id="page-gmv">
+      <div class="two-col">
+        <article class="card form-card">
+          <div class="card-head"><div><span class="eyebrow">MARKETING</span><h2>Input TikTok GMV</h2></div></div>
+          <form id="gmvForm">
+            <div class="form-grid">
+              <label>Tarikh<input id="gmvDate" type="date" required></label>
+              <label>Total Sales GMV (RM)<input id="gmvSales" type="number" min="0" step="0.01" required></label>
+              <label>Kos Ads sebelum SST (RM)<input id="gmvCost" type="number" min="0" step="0.01" required></label>
+              <label>Nota<input id="gmvNote" type="text" placeholder="Optional"></label>
+            </div>
+            <div class="preview" id="gmvPreview">Masukkan sales + cost untuk lihat ROI.</div>
+            <button class="primary" type="submit">Simpan GMV</button>
+          </form>
+        </article>
+
+        <article class="card">
+          <div class="card-head"><div><span class="eyebrow">RULE</span><h3>Formula GMV</h3></div></div>
+          <div class="formula-box">
+            <code>ROI = Sales Harian ÷ (Kos Ads + SST)</code>
+            <code>ROI ≥ 5 → 2%</code>
+            <code>ROI &lt; 5 → 1% *</code>
+          </div>
+          <p class="hint">* Penerangan asal menyebut “5 ke atas = 2%, 4 ke bawah = 1%”. Untuk elak gap 4.01–4.99, sistem sementara guna 1% apabila ROI &lt; 5. Boleh ubah di Rules & Setting.</p>
+        </article>
+      </div>
+
+      <article class="card table-card top-gap">
+        <div class="card-head"><div><span class="eyebrow">DAILY ROI</span><h3>GMV Bulan Dipilih</h3></div></div>
+        <div class="table-wrap">
+          <table><thead><tr><th>Tarikh</th><th>Sales GMV</th><th>Ads</th><th>SST</th><th>Cost + SST</th><th>ROI</th><th>Rate</th><th>Komisen</th><th></th></tr></thead><tbody id="gmvBody"></tbody></table>
+        </div>
+      </article>
+    </section>
+
+    <section class="page" id="page-cod">
+      <div class="two-col">
+        <article class="card form-card">
+          <div class="card-head"><div><span class="eyebrow">COD</span><h2>Tambah COD Follow-up</h2></div></div>
+          <form id="codForm">
+            <div class="form-grid">
+              <label>Tarikh Submit<input id="codDate" type="date" required></label>
+              <label>Kod<select id="codCode"><option>M9F</option><option>M9F 1</option></select></label>
+              <label>No. COD / Order<input id="codRef" type="text" required placeholder="Nombor COD"></label>
+              <label>Customer<input id="codCustomer" type="text" placeholder="Nama customer"></label>
+              <label>No. Telefon<input id="codPhone" type="text" placeholder="Optional"></label>
+              <label>Nilai COD (RM)<input id="codAmount" type="number" min="0" step="0.01"></label>
+              <label>Tarikh Follow-up<input id="codFollow" type="date"></label>
+              <label>Status<select id="codStatus"><option>Pending</option><option>Settled</option><option>Return</option></select></label>
+              <label class="full">Nota<input id="codNote" type="text" placeholder="Apa yang perlu follow up"></label>
+            </div>
+            <button class="primary" type="submit">Simpan COD</button>
+          </form>
+        </article>
+
+        <article class="card">
+          <div class="card-head"><div><span class="eyebrow">STATUS</span><h3>Ringkasan COD</h3></div></div>
+          <div class="mini-grid two">
+            <div class="small-stat"><span>Pending</span><b id="codPending">0</b></div>
+            <div class="small-stat"><span>Settled</span><b id="codSettled">0</b></div>
+            <div class="small-stat"><span>Return</span><b id="codReturn">0</b></div>
+            <div class="small-stat"><span>Nilai Pending</span><b id="codPendingValue">RM 0</b></div>
+          </div>
+          <p class="hint">COD disimpan sebagai rekod customer/order, bukan dicampur ke Total Sales secara automatik.</p>
+        </article>
+      </div>
+
+      <article class="card table-card top-gap">
+        <div class="card-head">
+          <div><span class="eyebrow">FOLLOW-UP</span><h3>Senarai COD</h3></div>
+          <select id="codFilter"><option value="all">Semua Status</option><option>Pending</option><option>Settled</option><option>Return</option></select>
+        </div>
+        <div class="table-wrap">
+          <table><thead><tr><th>Submit</th><th>Kod</th><th>No. COD</th><th>Customer</th><th>Telefon</th><th>Nilai</th><th>Follow-up</th><th>Status</th><th></th></tr></thead><tbody id="codBody"></tbody></table>
+        </div>
+      </article>
+    </section>
+
+    <section class="page" id="page-commission">
+      <div class="commission-grid">
+        <article class="card">
+          <div class="eyebrow">WHATSAPP + LIVE</div><h2>Komisen Sales</h2>
+          <div class="calc-list">
+            <div><span>Sales WhatsApp</span><b id="cWs">RM 0</b></div>
+            <div><span>Live 1–25 bulan ini</span><b id="cLiveCurrent">RM 0</b></div>
+            <div><span>Carry live 26–akhir bulan lepas</span><b id="cLiveCarry">RM 0</b></div>
+            <div><span>Total Sales dikira</span><b id="cSalesTotal">RM 0</b></div>
+            <div class="minus"><span>Tolak kos ads tetap</span><b id="cAdsDeduct">- RM 1,000</b></div>
+            <div><span>Commissionable Base</span><b id="cBase">RM 0</b></div>
+            <div class="total"><span>Komisen <i id="cRateLabel">4%</i></span><b id="cWsLiveCommission">RM 0</b></div>
+          </div>
+        </article>
+
+        <article class="card">
+          <div class="eyebrow">TIKTOK GMV</div><h2>Komisen Marketing</h2>
+          <div class="calc-list">
+            <div><span>Total GMV Sales</span><b id="cGmvSales">RM 0</b></div>
+            <div><span>Total Ads</span><b id="cGmvAds">RM 0</b></div>
+            <div><span>Total SST</span><b id="cGmvSst">RM 0</b></div>
+            <div><span>ROI keseluruhan</span><b id="cGmvRoi">0.00</b></div>
+            <div class="total"><span>Komisen GMV (daily)</span><b id="cGmvCommission">RM 0</b></div>
+          </div>
+        </article>
+
+        <article class="card grand-card">
+          <div class="eyebrow">ANGGARAN</div><h2>Total Komisen Bulan</h2>
+          <strong id="cGrand">RM 0</strong>
+          <p>Komisen Sales + Komisen GMV berdasarkan rules semasa.</p>
+        </article>
+      </div>
+
+      <article class="card table-card top-gap">
+        <div class="card-head"><div><span class="eyebrow">GMV DAILY</span><h3>Kenapa komisen GMV jadi angka ini?</h3></div></div>
+        <div class="table-wrap">
+          <table><thead><tr><th>Tarikh</th><th>Sales</th><th>Cost + SST</th><th>ROI</th><th>Rate</th><th>Komisen</th></tr></thead><tbody id="commissionGmvBody"></tbody></table>
+        </div>
+      </article>
+    </section>
+
+    <section class="page" id="page-target">
+      <article class="card form-card">
+        <div class="card-head"><div><span class="eyebrow">TARGET SALES</span><h2>Set Target Bulanan</h2></div><strong class="target-total" id="targetSalesTotal">RM 0</strong></div>
+        <form id="targetForm">
+          <div class="target-grid">
+            <label>WhatsApp<input id="tWhatsapp" type="number" min="0" step="0.01"></label>
+            <label>Live TikTok HQ<input id="tLiveHQ" type="number" min="0" step="0.01"></label>
+            <label>Live TikTok Solusi<input id="tLiveSolusi" type="number" min="0" step="0.01"></label>
+            <label class="marketing-field">GMV Marketing (asing)<input id="tGmv" type="number" min="0" step="0.01"></label>
+          </div>
+          <div class="button-row"><button class="primary" type="submit">Simpan Target</button><button class="secondary" id="targetReset" type="button">Guna Target Asal Excel</button></div>
+        </form>
+      </article>
+      <div class="checkpoint-grid">
+        <article class="card checkpoint"><span>25% Sales Target</span><b id="cp25">RM 0</b></article>
+        <article class="card checkpoint"><span>50%</span><b id="cp50">RM 0</b></article>
+        <article class="card checkpoint"><span>75%</span><b id="cp75">RM 0</b></article>
+        <article class="card checkpoint"><span>100%</span><b id="cp100">RM 0</b></article>
+      </div>
+    </section>
+
+    <section class="page" id="page-history">
+      <div class="section-title">
+        <div><span class="eyebrow">FORECAST SALES NAIM.XLSX</span><h2>Data Lama — dengan Live, GMV & Komisen</h2></div>
+        <select id="historyYear"><option value="all">Semua Tahun</option></select>
+      </div>
+      <article class="card table-card">
+        <div class="table-wrap">
+          <table class="wide"><thead><tr>
+            <th>Bulan</th><th>Target Sales</th><th>WhatsApp</th><th>Live Cycle</th><th>Total Sales</th><th>GMV Marketing</th><th>ROI GMV</th><th>Komisen Sales</th><th>Komisen GMV</th><th>Total Komisen</th>
+          </tr></thead><tbody id="historyBody"></tbody></table>
+        </div>
+        <p class="footnote">Untuk bulan yang sheet lama belum mempunyai pecahan Live/GMV, ruangan tersebut akan kosong/0. GMV tidak ditambah kepada Total Sales.</p>
+      </article>
+    </section>
+
+    <section class="page" id="page-settings">
+      <article class="card form-card settings-card">
+        <div class="card-head"><div><span class="eyebrow">FORMULA</span><h2>Rules & Commission Setting</h2></div></div>
+        <form id="settingsForm">
+          <div class="setting-grid">
+            <label>Komisen WhatsApp + Live (%)<input id="sWsLiveRate" type="number" min="0" step="0.1"></label>
+            <label>Tolak kos ads tetap (RM)<input id="sAdsDeduction" type="number" min="0" step="1"></label>
+            <label>SST Ads (%)<input id="sSstRate" type="number" min="0" step="0.1"></label>
+            <label>ROI threshold untuk rate tinggi<input id="sRoiThreshold" type="number" min="0" step="0.1"></label>
+            <label>GMV rate rendah (%)<input id="sLowRate" type="number" min="0" step="0.1"></label>
+            <label>GMV rate tinggi (%)<input id="sHighRate" type="number" min="0" step="0.1"></label>
+          </div>
+          <button class="primary" type="submit">Simpan Rules</button>
+        </form>
+        <div class="rule-summary" id="ruleSummary"></div>
+      </article>
+    </section>
+
+    <section class="page" id="page-backup">
+      <div class="backup-grid">
+        <article class="card"><span class="eyebrow">EXPORT</span><h2>Backup Data Baru</h2><p class="muted">Backup semua input, COD, target override dan settings.</p><button class="primary" id="exportBtn">Download JSON</button></article>
+        <article class="card"><span class="eyebrow">IMPORT</span><h2>Restore Backup</h2><p class="muted">Pilih fail JSON yang pernah diexport daripada sistem ini.</p><input type="file" id="importFile" accept=".json,application/json"></article>
+        <article class="card danger-card"><span class="eyebrow">RESET</span><h2>Padam Data Tempatan</h2><p class="muted">Data sejarah Excel tidak akan hilang.</p><button class="danger" id="clearBtn">Padam Input Baru</button></article>
+      </div>
+    </section>
+  </main>
+</div>
+<div class="toast" id="toast"></div>
+<script src="js/historical-data.js"></script>
+<script src="js/app.js"></script>
 </body>
 </html>
