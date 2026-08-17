@@ -1,83 +1,12 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="ms">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Log Masuk — Blasting Control Room</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="css/base-extracted.css">
-<link rel="stylesheet" href="css/app-extra.css">
-<script>
-  (function() {
-    const saved = localStorage.getItem('theme') || 'dark';
-    if (saved === 'light') document.documentElement.setAttribute('data-theme', 'light');
-  })();
-</script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Naim Sales Performance</title>
+  <meta http-equiv="refresh" content="0; url=app.html">
 </head>
 <body>
-
-<button class="theme-toggle" id="theme-toggle" title="Tukar tema" style="position:fixed; top:20px; right:20px; z-index:100;">🌙</button>
-
-<div class="auth-wrap">
-  <div class="auth-card">
-    <div class="auth-brand">
-      <img src="assets/logo-white.png" alt="Mamariam" class="brand-logo brand-logo-dark">
-      <img src="assets/logo-black.png" alt="Mamariam" class="brand-logo brand-logo-light">
-      <div class="brand-name">MAMARIAM — DASHBOARD TEAM CRM</div>
-    </div>
-
-    <!-- LOGIN -->
-    <div id="screen-login" class="auth-screen active">
-      <h1 class="auth-title">Selamat datang semula 👋</h1>
-      <p class="auth-sub">Log masuk untuk teruskan kerja blasting</p>
-      <div id="login-error" class="auth-error"></div>
-      <form id="login-form">
-        <div class="field"><label>Email</label><input type="email" id="login-email" required></div>
-        <div class="field"><label>Password</label><input type="password" id="login-password" required></div>
-        <button type="submit" class="btn btn-primary">Log Masuk</button>
-      </form>
-      <div class="auth-links">
-        <a id="go-reset">Lupa password?</a> &nbsp;·&nbsp; <a id="go-register">Daftar Akaun Baru</a>
-      </div>
-    </div>
-
-    <!-- REGISTER -->
-    <div id="screen-register" class="auth-screen">
-      <h1 class="auth-title">Daftar Akaun</h1>
-      <p class="auth-sub">Akaun staff untuk isi data blasting harian</p>
-      <div id="register-error" class="auth-error"></div>
-      <form id="register-form">
-        <div class="field"><label>Nama Penuh</label><input type="text" id="reg-name" required></div>
-        <div class="field"><label>Email</label><input type="email" id="reg-email" required></div>
-        <div class="field"><label>Password</label><input type="password" id="reg-password" minlength="6" required></div>
-        <button type="submit" class="btn btn-primary">Daftar Sekarang</button>
-      </form>
-      <div class="auth-links">Dah ada akaun? <a id="go-login">Log Masuk</a></div>
-    </div>
-
-    <!-- RESET -->
-    <div id="screen-reset" class="auth-screen">
-      <h1 class="auth-title">Reset Password</h1>
-      <p class="auth-sub">Link reset akan dihantar ke email anda</p>
-      <div id="reset-error" class="auth-error"></div>
-      <form id="reset-form">
-        <div class="field"><label>Email</label><input type="email" id="reset-email" required></div>
-        <button type="submit" class="btn btn-primary">Hantar Link Reset</button>
-      </form>
-      <div class="auth-links"><a id="go-login-2">← Kembali Log Masuk</a></div>
-    </div>
-  </div>
-</div>
-
-<style>.auth-screen{display:none;} .auth-screen.active{display:block;}</style>
-
-<!-- Firebase SDK (compat, tak perlu build step) -->
-<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-auth-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.13.0/firebase-firestore-compat.js"></script>
-<script src="js/firebase-config.js"></script>
-<script src="js/auth.js"></script>
+  <p>Membuka dashboard... <a href="app.html">Klik sini</a>.</p>
 </body>
 </html>
